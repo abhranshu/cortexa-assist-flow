@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 const Vision = () => {
+  const [readMoreOpen, setReadMoreOpen] = useState(false);
+
   return (
     <section id="vision" className="py-24 relative">
       <div className="container mx-auto px-6">
@@ -27,7 +31,12 @@ const Vision = () => {
               proactively offering assistance, CORTEXA transforms the AI
               experience from reactive to truly supportive.
             </p>
-            <Button variant="hero" size="lg" aria-label="Learn more about our vision">
+            <Button 
+              variant="hero" 
+              size="lg"
+              onClick={() => setReadMoreOpen(true)}
+              aria-label="Learn more about our vision"
+            >
               Read More
             </Button>
           </motion.div>
@@ -52,6 +61,43 @@ const Vision = () => {
           </motion.div>
         </div>
       </div>
+
+      <Dialog open={readMoreOpen} onOpenChange={setReadMoreOpen}>
+        <DialogContent className="glass-card border-violet/20 max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl gradient-text">Our Vision in Depth</DialogTitle>
+            <DialogDescription className="text-foreground/70">
+              Reimagining AI as a proactive companion
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-6 space-y-4 text-foreground/80">
+            <p className="leading-relaxed">
+              Traditional AI tools operate on a simple request-response model. You ask, they answer. But what happens when you don't know what to ask? When cognitive overload makes it hard to articulate your needs?
+            </p>
+            <p className="leading-relaxed">
+              CORTEXA flips this paradigm. By continuously monitoring your digital environment—not invasively, but intelligently—we can detect the subtle signs that you might need help:
+            </p>
+            <ul className="space-y-2 ml-6 list-disc">
+              <li>Extended periods of inactivity on a task</li>
+              <li>Rapid context switching between applications</li>
+              <li>Repeated edits or deletions suggesting uncertainty</li>
+              <li>Time-based patterns indicating fatigue</li>
+            </ul>
+            <p className="leading-relaxed">
+              When these signals appear, CORTEXA doesn't wait. It gently offers assistance—a suggestion, a reminder, a helpful resource—exactly when you need it most. This proactive approach transforms AI from a passive tool into an active partner in your success.
+            </p>
+            <div className="glass-card rounded-lg p-4 border border-aqua/20 mt-6">
+              <h4 className="font-semibold mb-2 text-aqua">Our Core Principles:</h4>
+              <ul className="space-y-2 text-sm">
+                <li>✓ Privacy-first: Your data stays yours</li>
+                <li>✓ Non-intrusive: Help when needed, invisible when not</li>
+                <li>✓ Personalized: Learns your unique patterns</li>
+                <li>✓ Empowering: Builds independence, not dependence</li>
+              </ul>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

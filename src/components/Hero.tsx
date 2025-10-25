@@ -1,8 +1,17 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Brain } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 const Hero = () => {
+  const [demoOpen, setDemoOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Animated Background */}
@@ -53,10 +62,22 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button variant="hero" size="lg" className="min-w-[200px]" aria-label="Try CORTEXA Demo">
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="min-w-[200px]" 
+                onClick={() => setDemoOpen(true)}
+                aria-label="Try CORTEXA Demo"
+              >
                 Try Demo
               </Button>
-              <Button variant="outline" size="lg" className="min-w-[200px]" aria-label="Learn more about CORTEXA">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="min-w-[200px]"
+                onClick={() => scrollToSection("vision")}
+                aria-label="Learn more about CORTEXA"
+              >
                 Learn More
               </Button>
             </div>
@@ -66,6 +87,42 @@ const Hero = () => {
 
       {/* Decorative Elements */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" aria-hidden="true" />
+
+      <Dialog open={demoOpen} onOpenChange={setDemoOpen}>
+        <DialogContent className="glass-card border-violet/20">
+          <DialogHeader>
+            <DialogTitle className="text-2xl gradient-text">CORTEXA Demo</DialogTitle>
+            <DialogDescription className="text-foreground/70">
+              Experience proactive AI assistance designed for neurodivergent minds.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-6 space-y-4">
+            <p className="text-foreground/80">
+              Our demo is currently in development. CORTEXA will monitor your workflow and offer assistance before you even need to ask.
+            </p>
+            <div className="glass-card rounded-lg p-4 border border-violet/20">
+              <h4 className="font-semibold mb-2 text-violet">Coming Soon:</h4>
+              <ul className="space-y-2 text-sm text-foreground/70">
+                <li>• Real-time cognitive load detection</li>
+                <li>• Contextual assistance suggestions</li>
+                <li>• Personalized support patterns</li>
+                <li>• Privacy-first monitoring</li>
+              </ul>
+            </div>
+            <Button 
+              variant="hero" 
+              className="w-full mt-4"
+              onClick={() => {
+                setDemoOpen(false);
+                const footer = document.getElementById("footer");
+                footer?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Notify Me When Ready
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
