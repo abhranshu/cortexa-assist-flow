@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Brain } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { ChatInterface } from "@/components/ChatInterface";
 
 const Hero = () => {
   const [demoOpen, setDemoOpen] = useState(false);
@@ -89,38 +90,14 @@ const Hero = () => {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" aria-hidden="true" />
 
       <Dialog open={demoOpen} onOpenChange={setDemoOpen}>
-        <DialogContent className="glass-card border-violet/20">
+        <DialogContent className="glass-card border-violet/20 max-w-2xl">
           <DialogHeader>
-            <DialogTitle className="text-2xl gradient-text">CORTEXA Demo</DialogTitle>
+            <DialogTitle className="text-2xl gradient-text">Chat with CORTEXA</DialogTitle>
             <DialogDescription className="text-foreground/70">
-              Experience proactive AI assistance designed for neurodivergent minds.
+              Your proactive AI companion for focus, creativity, and productivity.
             </DialogDescription>
           </DialogHeader>
-          <div className="py-6 space-y-4">
-            <p className="text-foreground/80">
-              Our demo is currently in development. CORTEXA will monitor your workflow and offer assistance before you even need to ask.
-            </p>
-            <div className="glass-card rounded-lg p-4 border border-violet/20">
-              <h4 className="font-semibold mb-2 text-violet">Coming Soon:</h4>
-              <ul className="space-y-2 text-sm text-foreground/70">
-                <li>• Real-time cognitive load detection</li>
-                <li>• Contextual assistance suggestions</li>
-                <li>• Personalized support patterns</li>
-                <li>• Privacy-first monitoring</li>
-              </ul>
-            </div>
-            <Button 
-              variant="hero" 
-              className="w-full mt-4"
-              onClick={() => {
-                setDemoOpen(false);
-                const footer = document.getElementById("footer");
-                footer?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Notify Me When Ready
-            </Button>
-          </div>
+          <ChatInterface />
         </DialogContent>
       </Dialog>
     </section>
